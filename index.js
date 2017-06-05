@@ -51,6 +51,7 @@ module.exports = (function(){
         "handlebarsIfBlock": parse_handlebarsIfBlock,
         "handlebarsEachBlock": parse_handlebarsEachBlock,
         "handlebarsUnlessBlock": parse_handlebarsUnlessBlock,
+        "handlebarsPartialBlock": parse_handlebarsPartialBlock,
         "handlebarsGenericBlock": parse_handlebarsGenericBlock,
         "handlebarsElseBlock": parse_handlebarsElseBlock,
         "handlebarsSingleNode": parse_handlebarsSingleNode,
@@ -58,12 +59,15 @@ module.exports = (function(){
         "handlebarsUnSafeEvaluation": parse_handlebarsUnSafeEvaluation,
         "handlebarsLookup": parse_handlebarsLookup,
         "handlebarsSingleComment": parse_handlebarsSingleComment,
+        "handlebarsSinglePartial": parse_handlebarsSinglePartial,
         "handlebarsSingleCommentToken": parse_handlebarsSingleCommentToken,
         "handlebarsSafeGenericSingle": parse_handlebarsSafeGenericSingle,
         "handlebarsUnSafeGenericSingle": parse_handlebarsUnSafeGenericSingle,
         "lookUpWords": parse_lookUpWords,
         "params": parse_params,
+        "namedParams": parse_namedParams,
         "param": parse_param,
+        "namedParam": parse_namedParam,
         "paramTokenSingleQuote": parse_paramTokenSingleQuote,
         "paramTokenDoubleQuote": parse_paramTokenDoubleQuote,
         "attributes": parse_attributes,
@@ -85,6 +89,7 @@ module.exports = (function(){
         "attributeHandlebarsBlockIF": parse_attributeHandlebarsBlockIF,
         "attributeHandlebarsBlockEACH": parse_attributeHandlebarsBlockEACH,
         "attributeHandelbarsBlockUNLESS": parse_attributeHandelbarsBlockUNLESS,
+        "attributeHandlebarsBlockPARTIAL": parse_attributeHandlebarsBlockPARTIAL,
         "handlebarsIfElseBlock": parse_handlebarsIfElseBlock,
         "attributeHandlebarsBlockGENERIC": parse_attributeHandlebarsBlockGENERIC,
         "attributesHandlebarsSingle": parse_attributesHandlebarsSingle,
@@ -95,6 +100,7 @@ module.exports = (function(){
         "attributeHandlebarsSingleCOMMENT": parse_attributeHandlebarsSingleCOMMENT,
         "attributeHandlebarsSingleCOMMENTToken": parse_attributeHandlebarsSingleCOMMENTToken,
         "word": parse_word,
+        "key": parse_key,
         "ignorable": parse_ignorable,
         "space": parse_space
       };
@@ -184,8 +190,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, n, ns) {
-        			return isArray(n) ? n.concat(ns) : [n].concat(ns) ;
-        		})(pos0, result0[0], result0[2]);
+              return isArray(n) ? n.concat(ns) : [n].concat(ns) ;
+            })(pos0, result0[0], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -195,8 +201,8 @@ module.exports = (function(){
           result0 = parse_node();
           if (result0 !== null) {
             result0 = (function(offset, n) {
-          			return [n];
-          		})(pos0, result0);
+                return [n];
+              })(pos0, result0);
           }
           if (result0 === null) {
             pos = pos0;
@@ -446,19 +452,19 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, openTagName, attrs, ns, closeTagName) {
-        			return {
-        				//@property {String} type Value 'htmlBlockNode'
-        				type: 'htmlBlockNode'
-        				//@property {String} openTag
-        			,	openTag: openTagName
-        				//@property {String} closeTag
-        			,	closeTag: closeTagName
-        				//@property {Array<AttributeASTNode>} attributes
-        			,	attributes: attrs || []
-        				//@property {Array<NodeASTNode>} children
-        			,	children: ns || []
-        			};
-        		})(pos0, result0[5], result0[7], result0[11], result0[14]);
+              return {
+                //@property {String} type Value 'htmlBlockNode'
+                type: 'htmlBlockNode'
+                //@property {String} openTag
+              , openTag: openTagName
+                //@property {String} closeTag
+              , closeTag: closeTagName
+                //@property {Array<AttributeASTNode>} attributes
+              , attributes: attrs || []
+                //@property {Array<NodeASTNode>} children
+              , children: ns || []
+              };
+            })(pos0, result0[5], result0[7], result0[11], result0[14]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -588,14 +594,14 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, attrs, f) {
-          			return {
-          				type: 'htmlBlockNode'
-          			,	openTag: 'input'
-          			,	closeTag: 'input'
-          			,	attributes: attrs || []
-          			,	children: isArray(f[1]) ? f[1] :  []
-          			};
-          		})(pos0, result0[3], result0[6]);
+                return {
+                  type: 'htmlBlockNode'
+                , openTag: 'input'
+                , closeTag: 'input'
+                , attributes: attrs || []
+                , children: isArray(f[1]) ? f[1] :  []
+                };
+              })(pos0, result0[3], result0[6]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -725,15 +731,15 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, tagName, attrs) {
-        			return {
-        				//@property {String} type Possible values: 'htmlSingleNode', 'htmlComment'
-        				type: 'htmlSingleNode'
-        				//@property {String?} tag This attribute will be null in can the node is of type 'htmlComment'
-        			,	tag: tagName
-        				//@property {Array<AttributeASTNode>} attributes
-        			,	attributes: attrs || []
-        			};
-        		})(pos0, result0[3], result0[5]);
+              return {
+                //@property {String} type Possible values: 'htmlSingleNode', 'htmlComment'
+                type: 'htmlSingleNode'
+                //@property {String?} tag This attribute will be null in can the node is of type 'htmlComment'
+              , tag: tagName
+                //@property {Array<AttributeASTNode>} attributes
+              , attributes: attrs || []
+              };
+            })(pos0, result0[3], result0[5]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -812,12 +818,12 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, attrs) {
-          			return {
-          				type: 'htmlSingleNode'
-          			,	tag: 'input'
-          			,	attributes: attrs || []
-          			};
-          		})(pos0, result0[3]);
+                return {
+                  type: 'htmlSingleNode'
+                , tag: 'input'
+                , attributes: attrs || []
+                };
+              })(pos0, result0[3]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -878,12 +884,12 @@ module.exports = (function(){
             }
             if (result0 !== null) {
               result0 = (function(offset, c) {
-            			return {
-            				type: 'htmlComment'
-            				//@property {String?} value This property that contains the comment it self will be only present if the node is a comment
-            			,	value: c.join('')
-            			};
-            		})(pos0, result0[2]);
+                  return {
+                    type: 'htmlComment'
+                    //@property {String?} value This property that contains the comment it self will be only present if the node is a comment
+                  , value: c.join('')
+                  };
+                })(pos0, result0[2]);
             }
             if (result0 === null) {
               pos = pos0;
@@ -939,8 +945,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, c) {
-        			return c;
-        		})(pos0, result0[1]);
+              return c;
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -1295,13 +1301,13 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w) {
-        			return {
-        				//@property {String} type Value 'text'
-        				type: 'text'
-        				//@property {String} value
-        			,	value: w.join('')
-        			};
-        		})(pos0, result0[1]);
+              return {
+                //@property {String} type Value 'text'
+                type: 'text'
+                //@property {String} value
+              , value: w.join('')
+              };
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -1325,8 +1331,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w) {
-        			return w;
-        		})(pos0, result0);
+              return w;
+            })(pos0, result0);
         }
         if (result0 === null) {
           pos = pos0;
@@ -1353,7 +1359,10 @@ module.exports = (function(){
           if (result0 === null) {
             result0 = parse_handlebarsUnlessBlock();
             if (result0 === null) {
-              result0 = parse_handlebarsGenericBlock();
+              result0 = parse_handlebarsPartialBlock();
+              if (result0 === null) {
+                result0 = parse_handlebarsGenericBlock();
+              }
             }
           }
         }
@@ -1497,19 +1506,19 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, condition, ifBody, elseBody) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'IF'
-        			,	subType: 'IF'
-        				//@property {HandlebarsBaseConditionNodeAST} condition
-        			,	condition: getHandlebarsBaseConditionObject(condition)
-        				//@property {Array<NodeASTNode>} ifBody
-        			,	ifBody: ifBody || []
-        				//@property {Array<NodeASTNode>} elseBody
-        			,	elseBody: elseBody || []
-        			};
-        		})(pos0, result0[3], result0[7], result0[9]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'IF'
+              , subType: 'IF'
+                //@property {HandlebarsBaseConditionNodeAST} condition
+              , condition: getHandlebarsBaseConditionObject(condition)
+                //@property {Array<NodeASTNode>} ifBody
+              , ifBody: ifBody || []
+                //@property {Array<NodeASTNode>} elseBody
+              , elseBody: elseBody || []
+              };
+            })(pos0, result0[3], result0[7], result0[9]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -1654,19 +1663,19 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, iterator, eachBody, elseBody) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'EACH'
-        			,	subType: 'EACH'
-        				//@property {HandlebarsBaseConditionNodeAST} iterator
-        			,	iterator: getHandlebarsBaseConditionObject(iterator)
-        				//@property {Array<NodeASTNode>} eachBody
-        			,	eachBody: eachBody || []
-        				//@property {Array<NodeASTNode>} elseBody
-        			,	elseBody: elseBody || []
-        			};
-        		})(pos0, result0[3], result0[7], result0[9]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'EACH'
+              , subType: 'EACH'
+                //@property {HandlebarsBaseConditionNodeAST} iterator
+              , iterator: getHandlebarsBaseConditionObject(iterator)
+                //@property {Array<NodeASTNode>} eachBody
+              , eachBody: eachBody || []
+                //@property {Array<NodeASTNode>} elseBody
+              , elseBody: elseBody || []
+              };
+            })(pos0, result0[3], result0[7], result0[9]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -1811,19 +1820,190 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, condition, unlessBody, elseBody) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'UNLESS'
-        			,	subType: 'UNLESS'
-        				//@property {HandlebarsBaseConditionNodeAST} condition
-        			,	condition: getHandlebarsBaseConditionObject(condition)
-        				//@property {Array<NodeASTNode>} unlessBody
-        			,	unlessBody: unlessBody || []
-        				//@property {Array<NodeASTNode>} elseBody
-        			,	elseBody: elseBody || []
-        			};
-        		})(pos0, result0[3], result0[7], result0[9]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'UNLESS'
+              , subType: 'UNLESS'
+                //@property {HandlebarsBaseConditionNodeAST} condition
+              , condition: getHandlebarsBaseConditionObject(condition)
+                //@property {Array<NodeASTNode>} unlessBody
+              , unlessBody: unlessBody || []
+                //@property {Array<NodeASTNode>} elseBody
+              , elseBody: elseBody || []
+              };
+            })(pos0, result0[3], result0[7], result0[9]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        return result0;
+      }
+      
+      function parse_handlebarsPartialBlock() {
+        var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = [];
+        result1 = parse_ignorable();
+        while (result1 !== null) {
+          result0.push(result1);
+          result1 = parse_ignorable();
+        }
+        if (result0 !== null) {
+          if (input.substr(pos, 4) === "{{#>") {
+            result1 = "{{#>";
+            pos += 4;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"{{#>\"");
+            }
+          }
+          if (result1 !== null) {
+            result2 = [];
+            result3 = parse_space();
+            while (result3 !== null) {
+              result2.push(result3);
+              result3 = parse_space();
+            }
+            if (result2 !== null) {
+              result3 = parse_word();
+              if (result3 !== null) {
+                result4 = [];
+                result5 = parse_space();
+                while (result5 !== null) {
+                  result4.push(result5);
+                  result5 = parse_space();
+                }
+                if (result4 !== null) {
+                  result5 = parse_namedParams();
+                  if (result5 !== null) {
+                    result6 = [];
+                    result7 = parse_space();
+                    while (result7 !== null) {
+                      result6.push(result7);
+                      result7 = parse_space();
+                    }
+                    if (result6 !== null) {
+                      if (input.substr(pos, 2) === "}}") {
+                        result7 = "}}";
+                        pos += 2;
+                      } else {
+                        result7 = null;
+                        if (reportFailures === 0) {
+                          matchFailed("\"}}\"");
+                        }
+                      }
+                      if (result7 !== null) {
+                        result8 = [];
+                        result9 = parse_ignorable();
+                        while (result9 !== null) {
+                          result8.push(result9);
+                          result9 = parse_ignorable();
+                        }
+                        if (result8 !== null) {
+                          result9 = parse_nodes();
+                          result9 = result9 !== null ? result9 : "";
+                          if (result9 !== null) {
+                            result10 = [];
+                            result11 = parse_ignorable();
+                            while (result11 !== null) {
+                              result10.push(result11);
+                              result11 = parse_ignorable();
+                            }
+                            if (result10 !== null) {
+                              if (input.substr(pos, 3) === "{{/") {
+                                result11 = "{{/";
+                                pos += 3;
+                              } else {
+                                result11 = null;
+                                if (reportFailures === 0) {
+                                  matchFailed("\"{{/\"");
+                                }
+                              }
+                              if (result11 !== null) {
+                                result12 = parse_word();
+                                if (result12 !== null) {
+                                  if (input.substr(pos, 2) === "}}") {
+                                    result13 = "}}";
+                                    pos += 2;
+                                  } else {
+                                    result13 = null;
+                                    if (reportFailures === 0) {
+                                      matchFailed("\"}}\"");
+                                    }
+                                  }
+                                  if (result13 !== null) {
+                                    result0 = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12, result13];
+                                  } else {
+                                    result0 = null;
+                                    pos = pos1;
+                                  }
+                                } else {
+                                  result0 = null;
+                                  pos = pos1;
+                                }
+                              } else {
+                                result0 = null;
+                                pos = pos1;
+                              }
+                            } else {
+                              result0 = null;
+                              pos = pos1;
+                            }
+                          } else {
+                            result0 = null;
+                            pos = pos1;
+                          }
+                        } else {
+                          result0 = null;
+                          pos = pos1;
+                        }
+                      } else {
+                        result0 = null;
+                        pos = pos1;
+                      }
+                    } else {
+                      result0 = null;
+                      pos = pos1;
+                    }
+                  } else {
+                    result0 = null;
+                    pos = pos1;
+                  }
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, partialName, params, children, partialCloseName) {
+              return {
+                type: 'handlebars',
+                subType: 'PARTIAL',
+                value: partialName,
+                parameters: params || [],
+                children: children || []
+              };
+            })(pos0, result0[3], result0[5], result0[9], result0[12]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -1966,21 +2146,21 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, openTagName, params, children, closeTagName) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'GENERICBLOCK'
-        			,	subType: 'GENERICBLOCK'
-        				//@property {String} openTag
-        			,	openTag: openTagName
-        				//@property {String} closeTag
-        			,	closeTag: closeTagName
-        				//@property {Array<ParameterHandlebarsNodeASTNode>} parameters
-        			,	parameters: params || []
-        				//@property {Array<NodeASTNode>} children
-        			,	children: children || []
-        			};
-        		})(pos0, result0[1], result0[3], result0[7], result0[10]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'GENERICBLOCK'
+              , subType: 'GENERICBLOCK'
+                //@property {String} openTag
+              , openTag: openTagName
+                //@property {String} closeTag
+              , closeTag: closeTagName
+                //@property {Array<ParameterHandlebarsNodeASTNode>} parameters
+              , parameters: params || []
+                //@property {Array<NodeASTNode>} children
+              , children: children || []
+              };
+            })(pos0, result0[1], result0[3], result0[7], result0[10]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2029,8 +2209,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, ns) {
-        			return ns || [];
-        		})(pos0, result0[2]);
+              return ns || [];
+            })(pos0, result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2049,9 +2229,12 @@ module.exports = (function(){
             if (result0 === null) {
               result0 = parse_handlebarsSingleComment();
               if (result0 === null) {
-                result0 = parse_handlebarsSafeGenericSingle();
+                result0 = parse_handlebarsSinglePartial();
                 if (result0 === null) {
-                  result0 = parse_handlebarsUnSafeGenericSingle();
+                  result0 = parse_handlebarsSafeGenericSingle();
+                  if (result0 === null) {
+                    result0 = parse_handlebarsUnSafeGenericSingle();
+                  }
                 }
               }
             }
@@ -2171,17 +2354,17 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Possible values:
-        				// 'SAFEREFERENCEEVALUATION' in case the value starts with '@',
-        				// 'SAFEEVALUATION' otherwise
-        			,	subType: w.indexOf('@') === 0 ? 'SAFEREFERENCEEVALUATION' : 'SAFEEVALUATION'
-        				//@property {String} value
-        			,	value: w
-        			};
-        		})(pos0, result0[4]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Possible values:
+                // 'SAFEREFERENCEEVALUATION' in case the value starts with '@',
+                // 'SAFEEVALUATION' otherwise
+              , subType: w.indexOf('@') === 0 ? 'SAFEREFERENCEEVALUATION' : 'SAFEEVALUATION'
+                //@property {String} value
+              , value: w
+              };
+            })(pos0, result0[4]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2254,17 +2437,17 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Possible values:
-        				// 'UNSAFEREFERENCEEVALUATION' in case the value starts with '@',
-        				// 'UNSAFEEVALUATION' otherwise
-        			,	subType: w.indexOf('@') === 0 ? 'UNSAFEREFERENCEEVALUATION' : 'UNSAFEEVALUATION'
-        				//@property {String} value
-        			,	value: w
-        			};
-        		})(pos0, result0[2]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Possible values:
+                // 'UNSAFEREFERENCEEVALUATION' in case the value starts with '@',
+                // 'UNSAFEEVALUATION' otherwise
+              , subType: w.indexOf('@') === 0 ? 'UNSAFEREFERENCEEVALUATION' : 'UNSAFEEVALUATION'
+                //@property {String} value
+              , value: w
+              };
+            })(pos0, result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2360,15 +2543,15 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'LOOKUPSINGLE'
-        			,	subType: 'LOOKUPSINGLE'
-        				//@property {Array<String>} value
-        			,	value: w
-        			};
-        		})(pos0, result0[3]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'LOOKUPSINGLE'
+              , subType: 'LOOKUPSINGLE'
+                //@property {Array<String>} value
+              , value: w
+              };
+            })(pos0, result0[3]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2424,15 +2607,112 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, c) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'SINGLECOMMENTS'
-        			,	subType: 'SINGLECOMMENTS'
-        				//@property {String} value
-        			,	value: c.join('')
-        			};
-        		})(pos0, result0[1]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'SINGLECOMMENTS'
+              , subType: 'SINGLECOMMENTS'
+                //@property {String} value
+              , value: c.join('')
+              };
+            })(pos0, result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        return result0;
+      }
+      
+      function parse_handlebarsSinglePartial() {
+        var result0, result1, result2, result3, result4, result5, result6;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 3) === "{{>") {
+          result0 = "{{>";
+          pos += 3;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"{{>\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = [];
+          result2 = parse_space();
+          while (result2 !== null) {
+            result1.push(result2);
+            result2 = parse_space();
+          }
+          if (result1 !== null) {
+            result2 = parse_word();
+            if (result2 !== null) {
+              result3 = [];
+              result4 = parse_space();
+              while (result4 !== null) {
+                result3.push(result4);
+                result4 = parse_space();
+              }
+              if (result3 !== null) {
+                result4 = parse_namedParams();
+                result4 = result4 !== null ? result4 : "";
+                if (result4 !== null) {
+                  result5 = [];
+                  result6 = parse_space();
+                  while (result6 !== null) {
+                    result5.push(result6);
+                    result6 = parse_space();
+                  }
+                  if (result5 !== null) {
+                    if (input.substr(pos, 2) === "}}") {
+                      result6 = "}}";
+                      pos += 2;
+                    } else {
+                      result6 = null;
+                      if (reportFailures === 0) {
+                        matchFailed("\"}}\"");
+                      }
+                    }
+                    if (result6 !== null) {
+                      result0 = [result0, result1, result2, result3, result4, result5, result6];
+                    } else {
+                      result0 = null;
+                      pos = pos1;
+                    }
+                  } else {
+                    result0 = null;
+                    pos = pos1;
+                  }
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, partialName, params) {
+                  return {
+                      type: 'handlebars',
+                      subType: 'SINGLEPARTIALS',
+                      value: partialName,
+                      parameters: params || []
+                  };
+              })(pos0, result0[2], result0[4]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2486,8 +2766,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, t) {
-        			return t;
-        		})(pos0, result0[1]);
+              return t;
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2616,17 +2896,17 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w, ps) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'GENERICSINGLE'
-        			,	subType: 'GENERICSINGLE'
-        				//@property {String} value
-        			,	value: w
-        				//@property {Array<ParameterHandlebarsNodeASTNode>} parameters
-        			,	parameters: ps
-        			};
-        		})(pos0, result0[3], result0[5]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'GENERICSINGLE'
+              , subType: 'GENERICSINGLE'
+                //@property {String} value
+              , value: w
+                //@property {Array<ParameterHandlebarsNodeASTNode>} parameters
+              , parameters: ps
+              };
+            })(pos0, result0[3], result0[5]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2755,17 +3035,17 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w, ps) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'UNSAFEGENERICSINGLE'
-        			,	subType: 'UNSAFEGENERICSINGLE'
-        				//@property {String} value
-        			,	value: w
-        				//@property {Array<ParameterHandlebarsNodeASTNode>} parameters
-        			,	parameters: ps
-        			};
-        		})(pos0, result0[3], result0[5]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'UNSAFEGENERICSINGLE'
+              , subType: 'UNSAFEGENERICSINGLE'
+                //@property {String} value
+              , value: w
+                //@property {Array<ParameterHandlebarsNodeASTNode>} parameters
+              , parameters: ps
+              };
+            })(pos0, result0[3], result0[5]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2808,8 +3088,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w, ws) {
-        			return [w].concat(ws);
-        		})(pos0, result0[0], result0[2]);
+              return [w].concat(ws);
+            })(pos0, result0[0], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2819,8 +3099,8 @@ module.exports = (function(){
           result0 = parse_word();
           if (result0 !== null) {
             result0 = (function(offset, w) {
-          			return [w];
-          		})(pos0, result0);
+                return [w];
+              })(pos0, result0);
           }
           if (result0 === null) {
             pos = pos0;
@@ -2861,14 +3141,58 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, p, ps) {
-        			return p.concat(ps);
-        		})(pos0, result0[0], result0[2]);
+              return p.concat(ps);
+            })(pos0, result0[0], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
         }
         if (result0 === null) {
           result0 = parse_param();
+        }
+        return result0;
+      }
+      
+      function parse_namedParams() {
+        var result0, result1, result2;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = parse_namedParam();
+        if (result0 !== null) {
+          result1 = [];
+          result2 = parse_space();
+          while (result2 !== null) {
+            result1.push(result2);
+            result2 = parse_space();
+          }
+          if (result1 !== null) {
+            result2 = parse_namedParams();
+            if (result2 !== null) {
+              result0 = [result0, result1, result2];
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, p, ps) {
+              return p.concat(ps);
+            })(pos0, result0[0], result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        if (result0 === null) {
+          result0 = parse_namedParam();
         }
         return result0;
       }
@@ -2921,19 +3245,19 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, ws) {
-        			return [{
-        				//@property {String} type Value 'parameter'
-        				type: 'parameter'
-        				//@property {String} subType Possible values:
-        				// 'SIMPLEVALUE' in case of a simple string parameter (in the case it appears between quotes in the template),
-        				// 'LOOKUPSINGLE' when the value property is an array of strings,
-        				// 'REFERENCEEVALUATION' in case the value property is a reference evaluation (starts with '@'),
-        				// 'SINGLEEVALUATION' otherwise (when the value represents a simple variable evaluation)
-        			,	subType: 'SIMPLEVALUE'
-        				//@property {String|Array<String>} value
-        			,	value: "'" + ws.join('') + "'"
-        			}];
-        		})(pos0, result0[1]);
+              return [{
+                //@property {String} type Value 'parameter'
+                type: 'parameter'
+                //@property {String} subType Possible values:
+                // 'SIMPLEVALUE' in case of a simple string parameter (in the case it appears between quotes in the template),
+                // 'LOOKUPSINGLE' when the value property is an array of strings,
+                // 'REFERENCEEVALUATION' in case the value property is a reference evaluation (starts with '@'),
+                // 'SINGLEEVALUATION' otherwise (when the value represents a simple variable evaluation)
+              , subType: 'SIMPLEVALUE'
+                //@property {String|Array<String>} value
+              , value: "'" + ws.join('') + "'"
+              }];
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -2983,12 +3307,12 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, ws) {
-          			return [{
-          				type: 'parameter'
-          			,	subType: 'SIMPLEVALUE'
-          			,	value: '"' + ws.join('') + '"'
-          			}];
-          		})(pos0, result0[1]);
+                return [{
+                  type: 'parameter'
+                , subType: 'SIMPLEVALUE'
+                , value: '"' + ws.join('') + '"'
+                }];
+              })(pos0, result0[1]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -2998,13 +3322,62 @@ module.exports = (function(){
             result0 = parse_lookUpWords();
             if (result0 !== null) {
               result0 = (function(offset, l) {
-            			return [getHandlebarsBaseConditionObject(l, 'parameter')];
-            		})(pos0, result0);
+                  return [getHandlebarsBaseConditionObject(l, 'parameter')];
+                })(pos0, result0);
             }
             if (result0 === null) {
               pos = pos0;
             }
           }
+        }
+        return result0;
+      }
+      
+      function parse_namedParam() {
+        var result0, result1, result2;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        result0 = parse_key();
+        if (result0 !== null) {
+          if (input.charCodeAt(pos) === 61) {
+            result1 = "=";
+            pos++;
+          } else {
+            result1 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"=\"");
+            }
+          }
+          if (result1 !== null) {
+            result2 = parse_param();
+            if (result2 !== null) {
+              result0 = [result0, result1, result2];
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, key, value) {
+            return [{
+              type: 'handlebars',
+              subType: 'NAMEDPARAMETER',
+              key: key,
+              value: value
+            }];
+          })(pos0, result0[0], result0[2]);
+        }
+        if (result0 === null) {
+          pos = pos0;
         }
         return result0;
       }
@@ -3069,8 +3442,8 @@ module.exports = (function(){
         result0 = parse_itemList();
         if (result0 !== null) {
           result0 = (function(offset, il) {
-        			return isArray(il) ? il : [il];
-        		})(pos0, result0);
+              return isArray(il) ? il : [il];
+            })(pos0, result0);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3110,8 +3483,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, props, spaces, itemList) {
-        			return generateAndConcatAttributeSpaceNode(props, spaces, itemList);
-        		})(pos0, result0[0], result0[1], result0[2]);
+              return generateAndConcatAttributeSpaceNode(props, spaces, itemList);
+            })(pos0, result0[0], result0[1], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3145,8 +3518,8 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, props, spaces, itemList) {
-          			return generateAndConcatAttributeSpaceNode(props, spaces, itemList);
-          		})(pos0, result0[0], result0[1], result0[2]);
+                return generateAndConcatAttributeSpaceNode(props, spaces, itemList);
+              })(pos0, result0[0], result0[1], result0[2]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -3239,8 +3612,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, prop, spaces, props) {
-        			return generateAndConcatAttributeSpaceNode(prop, spaces, props);
-        		})(pos0, result0[2], result0[3], result0[4]);
+              return generateAndConcatAttributeSpaceNode(prop, spaces, props);
+            })(pos0, result0[2], result0[3], result0[4]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3303,8 +3676,8 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, as) {
-          			return as;
-          		})(pos0, result0[2]);
+                return as;
+              })(pos0, result0[2]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -3348,15 +3721,15 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, k, v) {
-        			return {
-        				//@property {String} type Value 'keyValue'
-        				type: 'keyValue'
-        				//@property {String} key
-        			,	key: k.value
-        				//@property {Array<SimpleValueHTMLAttributeASTNode>} value
-        			,	value: v
-        			};
-        		})(pos0, result0[0], result0[2]);
+              return {
+                //@property {String} type Value 'keyValue'
+                type: 'keyValue'
+                //@property {String} key
+              , key: k.value
+                //@property {Array<SimpleValueHTMLAttributeASTNode>} value
+              , value: v
+              };
+            })(pos0, result0[0], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3410,8 +3783,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, pk) {
-        			return pk;
-        		})(pos0, result0[1]);
+              return pk;
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3456,8 +3829,8 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, pk) {
-          			return pk;
-          		})(pos0, result0[1]);
+                return pk;
+              })(pos0, result0[1]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -3502,13 +3875,13 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, keyName) {
-        			return {
-        				//@property {String} type Value 'singleKey'
-        				type: "singleKey"
-        				//@property {String} value
-        			,	value: keyName.join('')
-        			};
-        		})(pos0, result0);
+              return {
+                //@property {String} type Value 'singleKey'
+                type: "singleKey"
+                //@property {String} value
+              , value: keyName.join('')
+              };
+            })(pos0, result0);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3569,8 +3942,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, values) {
-        			return values;
-        		})(pos0, result0[1]);
+              return values;
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3588,13 +3961,13 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset) {
-          			return [{
-          				//@property {String} type Value 'singleValue'
-          				type: 'singleValue'
-          				//@property {String} value
-          			,	value: ''
-          			}];
-          		})(pos0);
+                return [{
+                  //@property {String} type Value 'singleValue'
+                  type: 'singleValue'
+                  //@property {String} value
+                , value: ''
+                }];
+              })(pos0);
           }
           if (result0 === null) {
             pos = pos0;
@@ -3635,8 +4008,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, v, spaces, vs) {
-        			return generateAndConcatAttributeSpaceNode(v, spaces, vs);
-        		})(pos0, result0[0], result0[1], result0[2]);
+              return generateAndConcatAttributeSpaceNode(v, spaces, vs);
+            })(pos0, result0[0], result0[1], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3664,8 +4037,8 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, v, spaces) {
-          			return generateAndConcatAttributeSpaceNode(v, spaces);
-          		})(pos0, result0[0], result0[1]);
+                return generateAndConcatAttributeSpaceNode(v, spaces);
+              })(pos0, result0[0], result0[1]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -3707,11 +4080,11 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, valueName) {
-        			return {
-        				type: 'singleValue'
-        			,	value: valueName.join('')
-        			};
-        		})(pos0, result0);
+              return {
+                type: 'singleValue'
+              , value: valueName.join('')
+              };
+            })(pos0, result0);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3765,8 +4138,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, values) {
-        			return values;
-        		})(pos0, result0[1]);
+              return values;
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3784,11 +4157,11 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset) {
-          			return [{
-          				type: 'singleValue'
-          			,	value: ''
-          			}];
-          		})(pos0);
+                return [{
+                  type: 'singleValue'
+                , value: ''
+                }];
+              })(pos0);
           }
           if (result0 === null) {
             pos = pos0;
@@ -3829,8 +4202,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, v, spaces, vs) {
-        			return generateAndConcatAttributeSpaceNode(v, spaces, vs);
-        		})(pos0, result0[0], result0[1], result0[2]);
+              return generateAndConcatAttributeSpaceNode(v, spaces, vs);
+            })(pos0, result0[0], result0[1], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3858,8 +4231,8 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, v, spaces) {
-          			return generateAndConcatAttributeSpaceNode(v, spaces);
-          		})(pos0, result0[0], result0[1]);
+                return generateAndConcatAttributeSpaceNode(v, spaces);
+              })(pos0, result0[0], result0[1]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -3901,11 +4274,11 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, valueName) {
-        			return {
-        				type: 'singleValue'
-        			,	value: valueName.join('')
-        			};
-        		})(pos0, result0);
+              return {
+                type: 'singleValue'
+              , value: valueName.join('')
+              };
+            })(pos0, result0);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3958,8 +4331,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, h, spaces, hs) {
-        			return generateAndConcatAttributeSpaceNode(h, spaces, hs);
-        		})(pos0, result0[0], result0[1], result0[2]);
+              return generateAndConcatAttributeSpaceNode(h, spaces, hs);
+            })(pos0, result0[0], result0[1], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -3979,7 +4352,10 @@ module.exports = (function(){
           if (result0 === null) {
             result0 = parse_attributeHandelbarsBlockUNLESS();
             if (result0 === null) {
-              result0 = parse_attributeHandlebarsBlockGENERIC();
+              result0 = parse_attributeHandlebarsBlockPARTIAL();
+              if (result0 === null) {
+                result0 = parse_attributeHandlebarsBlockGENERIC();
+              }
             }
           }
         }
@@ -4112,19 +4488,19 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, condition, s1, ifBody, s2, elseBody, s3) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'ATTRIF'
-        			,	subType: 'ATTRIF'
-        				//@property {HandlebarsBaseConditionNodeAST} condition
-        			,	condition: getHandlebarsBaseConditionObject(condition, null, 'ATTR')
-        				//@property {Array<AttributeASTNode>} ifBody
-        			,	ifBody: concatSortedSpaces(s1, ifBody || [], s2)
-        				//@property {Array<AttributeASTNode>} elseBody
-        			,	elseBody: concatSortedSpaces(null, elseBody || [], s3)
-        			};
-        		})(pos0, result0[2], result0[5], result0[6], result0[7], result0[8], result0[9]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'ATTRIF'
+              , subType: 'ATTRIF'
+                //@property {HandlebarsBaseConditionNodeAST} condition
+              , condition: getHandlebarsBaseConditionObject(condition, null, 'ATTR')
+                //@property {Array<AttributeASTNode>} ifBody
+              , ifBody: concatSortedSpaces(s1, ifBody || [], s2)
+                //@property {Array<AttributeASTNode>} elseBody
+              , elseBody: concatSortedSpaces(null, elseBody || [], s3)
+              };
+            })(pos0, result0[2], result0[5], result0[6], result0[7], result0[8], result0[9]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -4258,19 +4634,19 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, iterator, s1, eachBody, s2, elseBody, s3) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'ATTREACH'
-        			,	subType: 'ATTREACH'
-        				//@property {HandlebarsBaseConditionNodeAST} iterator
-        			,	iterator: getHandlebarsBaseConditionObject(iterator, null, 'ATTR')
-        				//@property {Array<AttributeASTNode>} eachBody
-        			,	eachBody: concatSortedSpaces(s1, eachBody || [], s2)
-        				//@property {Array<AttributeASTNode>} elseBody
-        			,	elseBody: concatSortedSpaces(null, elseBody || [], s3)
-        			};
-        		})(pos0, result0[2], result0[5], result0[6], result0[7], result0[8], result0[9]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'ATTREACH'
+              , subType: 'ATTREACH'
+                //@property {HandlebarsBaseConditionNodeAST} iterator
+              , iterator: getHandlebarsBaseConditionObject(iterator, null, 'ATTR')
+                //@property {Array<AttributeASTNode>} eachBody
+              , eachBody: concatSortedSpaces(s1, eachBody || [], s2)
+                //@property {Array<AttributeASTNode>} elseBody
+              , elseBody: concatSortedSpaces(null, elseBody || [], s3)
+              };
+            })(pos0, result0[2], result0[5], result0[6], result0[7], result0[8], result0[9]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -4404,19 +4780,180 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, condition, s1, unlessBody, s2, elseBody, s3) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'ATTRUNLESS'
-        			,	subType: 'ATTRUNLESS'
-        				//@property {HandlebarsBaseConditionNodeAST} condition
-        			,	condition: getHandlebarsBaseConditionObject(condition, null, 'ATTR')
-        				//@property {Array<AttributeASTNode>} unlessBody
-        			,	unlessBody: concatSortedSpaces(s1, unlessBody || [], s2)
-        				//@property {Array<AttributeASTNode>} elseBody
-        			,	elseBody: concatSortedSpaces(null, elseBody || [], s3)
-        			};
-        		})(pos0, result0[2], result0[5], result0[6], result0[7], result0[8], result0[9]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'ATTRUNLESS'
+              , subType: 'ATTRUNLESS'
+                //@property {HandlebarsBaseConditionNodeAST} condition
+              , condition: getHandlebarsBaseConditionObject(condition, null, 'ATTR')
+                //@property {Array<AttributeASTNode>} unlessBody
+              , unlessBody: concatSortedSpaces(s1, unlessBody || [], s2)
+                //@property {Array<AttributeASTNode>} elseBody
+              , elseBody: concatSortedSpaces(null, elseBody || [], s3)
+              };
+            })(pos0, result0[2], result0[5], result0[6], result0[7], result0[8], result0[9]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        return result0;
+      }
+      
+      function parse_attributeHandlebarsBlockPARTIAL() {
+        var result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12;
+        var pos0, pos1;
+        
+        pos0 = pos;
+        pos1 = pos;
+        if (input.substr(pos, 4) === "{{#>") {
+          result0 = "{{#>";
+          pos += 4;
+        } else {
+          result0 = null;
+          if (reportFailures === 0) {
+            matchFailed("\"{{#>\"");
+          }
+        }
+        if (result0 !== null) {
+          result1 = [];
+          result2 = parse_space();
+          while (result2 !== null) {
+            result1.push(result2);
+            result2 = parse_space();
+          }
+          if (result1 !== null) {
+            result2 = parse_word();
+            if (result2 !== null) {
+              result3 = [];
+              result4 = parse_space();
+              while (result4 !== null) {
+                result3.push(result4);
+                result4 = parse_space();
+              }
+              if (result3 !== null) {
+                result4 = parse_namedParams();
+                result4 = result4 !== null ? result4 : "";
+                if (result4 !== null) {
+                  result5 = [];
+                  result6 = parse_space();
+                  while (result6 !== null) {
+                    result5.push(result6);
+                    result6 = parse_space();
+                  }
+                  if (result5 !== null) {
+                    if (input.substr(pos, 2) === "}}") {
+                      result6 = "}}";
+                      pos += 2;
+                    } else {
+                      result6 = null;
+                      if (reportFailures === 0) {
+                        matchFailed("\"}}\"");
+                      }
+                    }
+                    if (result6 !== null) {
+                      result7 = [];
+                      result8 = parse_ignorable();
+                      while (result8 !== null) {
+                        result7.push(result8);
+                        result8 = parse_ignorable();
+                      }
+                      if (result7 !== null) {
+                        result8 = parse_itemList();
+                        result8 = result8 !== null ? result8 : "";
+                        if (result8 !== null) {
+                          result9 = [];
+                          result10 = parse_ignorable();
+                          while (result10 !== null) {
+                            result9.push(result10);
+                            result10 = parse_ignorable();
+                          }
+                          if (result9 !== null) {
+                            if (input.substr(pos, 3) === "{{/") {
+                              result10 = "{{/";
+                              pos += 3;
+                            } else {
+                              result10 = null;
+                              if (reportFailures === 0) {
+                                matchFailed("\"{{/\"");
+                              }
+                            }
+                            if (result10 !== null) {
+                              result11 = parse_word();
+                              if (result11 !== null) {
+                                if (input.substr(pos, 2) === "}}") {
+                                  result12 = "}}";
+                                  pos += 2;
+                                } else {
+                                  result12 = null;
+                                  if (reportFailures === 0) {
+                                    matchFailed("\"}}\"");
+                                  }
+                                }
+                                if (result12 !== null) {
+                                  result0 = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10, result11, result12];
+                                } else {
+                                  result0 = null;
+                                  pos = pos1;
+                                }
+                              } else {
+                                result0 = null;
+                                pos = pos1;
+                              }
+                            } else {
+                              result0 = null;
+                              pos = pos1;
+                            }
+                          } else {
+                            result0 = null;
+                            pos = pos1;
+                          }
+                        } else {
+                          result0 = null;
+                          pos = pos1;
+                        }
+                      } else {
+                        result0 = null;
+                        pos = pos1;
+                      }
+                    } else {
+                      result0 = null;
+                      pos = pos1;
+                    }
+                  } else {
+                    result0 = null;
+                    pos = pos1;
+                  }
+                } else {
+                  result0 = null;
+                  pos = pos1;
+                }
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+        } else {
+          result0 = null;
+          pos = pos1;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, partialName, params, l, closeName) {
+              return {
+                type: 'handlebars',
+                subType: 'BLOCKPARTIAL',
+                value: l || [],
+                partialName: partialName,
+                parameters: params || []
+              };
+            })(pos0, result0[2], result0[4], result0[8], result0[11]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -4465,8 +5002,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, spaces, il) {
-        			return concatSortedSpaces(spaces, il || []);
-        		})(pos0, result0[1], result0[2]);
+              return concatSortedSpaces(spaces, il || []);
+            })(pos0, result0[1], result0[2]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -4609,21 +5146,21 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, openName, params, l, closeName) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'ATTRGENERICBLOCK'
-        			,	subType: 'ATTRGENERICBLOCK'
-        				//@property {Array<AttributeASTNode>} value
-        			,	value: l || []
-        				//@property {String} openTag
-        			,	openTag: openName
-        				//@property {String} closeTag
-        			,	closeTag: closeName
-        				//@property {Array<ParameterHandlebarsNodeASTNode>} parameters
-        			,	parameters: params
-        			};
-        		})(pos0, result0[1], result0[3], result0[7], result0[10]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'ATTRGENERICBLOCK'
+              , subType: 'ATTRGENERICBLOCK'
+                //@property {Array<AttributeASTNode>} value
+              , value: l || []
+                //@property {String} openTag
+              , openTag: openName
+                //@property {String} closeTag
+              , closeTag: closeName
+                //@property {Array<ParameterHandlebarsNodeASTNode>} parameters
+              , parameters: params
+              };
+            })(pos0, result0[1], result0[3], result0[7], result0[10]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -4738,8 +5275,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, value) {
-        			return getHandlebarsBaseConditionObject(value, null, 'ATTR');
-        		})(pos0, result0[3]);
+              return getHandlebarsBaseConditionObject(value, null, 'ATTR');
+            })(pos0, result0[3]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -4876,17 +5413,17 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, v, parameterList) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'ATTRGENERICSINGLE'
-        			,	subType: 'ATTRGENERICSINGLE'
-        				//@property {String} value
-        			,	value: v
-        				//@property {Array<ParameterHandlebarsNodeASTNode>} parameters
-        			,	parameters: parameterList || []
-        			};
-        		})(pos0, result0[4], result0[6]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'ATTRGENERICSINGLE'
+              , subType: 'ATTRGENERICSINGLE'
+                //@property {String} value
+              , value: v
+                //@property {Array<ParameterHandlebarsNodeASTNode>} parameters
+              , parameters: parameterList || []
+              };
+            })(pos0, result0[4], result0[6]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -4982,8 +5519,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, value) {
-        			return getHandlebarsBaseConditionObject(value, null, 'ATTRUNSAFE');
-        		})(pos0, result0[3]);
+              return getHandlebarsBaseConditionObject(value, null, 'ATTRUNSAFE');
+            })(pos0, result0[3]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -5086,17 +5623,17 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, v, parameterList) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'ATTRUNSAFEGENERICSINGLE'
-        			,	subType: 'ATTRUNSAFEGENERICSINGLE'
-        				//@property {String} value
-        			,	value: v
-        				//@property {Array<ParameterHandlebarsNodeASTNode>} parameters
-        			,	parameters: parameterList || []
-        			};
-        		})(pos0, result0[2], result0[4]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'ATTRUNSAFEGENERICSINGLE'
+              , subType: 'ATTRUNSAFEGENERICSINGLE'
+                //@property {String} value
+              , value: v
+                //@property {Array<ParameterHandlebarsNodeASTNode>} parameters
+              , parameters: parameterList || []
+              };
+            })(pos0, result0[2], result0[4]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -5152,15 +5689,15 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, c) {
-        			return {
-        				//@property {String} type Value 'handlebars'
-        				type: 'handlebars'
-        				//@property {String} subType Value 'ATTRSINGLECOMMENTS'
-        			,	subType: 'ATTRSINGLECOMMENTS'
-        				//@property {String} value
-        			,	value: c.join('')
-        			};
-        		})(pos0, result0[1]);
+              return {
+                //@property {String} type Value 'handlebars'
+                type: 'handlebars'
+                //@property {String} subType Value 'ATTRSINGLECOMMENTS'
+              , subType: 'ATTRSINGLECOMMENTS'
+                //@property {String} value
+              , value: c.join('')
+              };
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -5214,8 +5751,8 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, t) {
-        			return t;
-        		})(pos0, result0[1]);
+              return t;
+            })(pos0, result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -5286,8 +5823,50 @@ module.exports = (function(){
         }
         if (result0 !== null) {
           result0 = (function(offset, w) {
-        			return w.join('');
-        		})(pos0, result0[1]);
+              return w.join('');
+            })(pos0, result0[1]);
+        }
+        if (result0 === null) {
+          pos = pos0;
+        }
+        return result0;
+      }
+      
+      function parse_key() {
+        var result0, result1;
+        var pos0;
+        
+        pos0 = pos;
+        if (/^[A-Za-z0-9_]/.test(input.charAt(pos))) {
+          result1 = input.charAt(pos);
+          pos++;
+        } else {
+          result1 = null;
+          if (reportFailures === 0) {
+            matchFailed("[A-Za-z0-9_]");
+          }
+        }
+        if (result1 !== null) {
+          result0 = [];
+          while (result1 !== null) {
+            result0.push(result1);
+            if (/^[A-Za-z0-9_]/.test(input.charAt(pos))) {
+              result1 = input.charAt(pos);
+              pos++;
+            } else {
+              result1 = null;
+              if (reportFailures === 0) {
+                matchFailed("[A-Za-z0-9_]");
+              }
+            }
+          }
+        } else {
+          result0 = null;
+        }
+        if (result0 !== null) {
+          result0 = (function(offset, w) {
+              return w.join('');
+            })(pos0, result0);
         }
         if (result0 === null) {
           pos = pos0;
@@ -5373,140 +5952,140 @@ module.exports = (function(){
       
       
       
-      	//@method joinAttributeSpaces Given a group of ignorable characters (spaces, enters, tabs, etc) this method clean it an returns only the valid spaces
-      	//@param {Array<Character>} spaces Please notice this is just an array of string, but based on how PEG works each string will be 1 character long
-      	//@param {String} Final string containing only spaces
-      	function joinAttributeSpaces (spaces)
-      	{
-      		return isArray(spaces) ? spaces.join('').replace(/\t|\n/g, '') : '';
-      	}
+        //@method joinAttributeSpaces Given a group of ignorable characters (spaces, enters, tabs, etc) this method clean it an returns only the valid spaces
+        //@param {Array<Character>} spaces Please notice this is just an array of string, but based on how PEG works each string will be 1 character long
+        //@param {String} Final string containing only spaces
+        function joinAttributeSpaces (spaces)
+        {
+          return isArray(spaces) ? spaces.join('').replace(/\t|\n/g, '') : '';
+        }
       
-      	//@method isArray Auxiliary method to determine is an object is or not an array
-      	//@param {Object} obj
-      	//@return {Boolean} True if the parameter passed in is an array false otherwise
-       	function isArray (obj)
-      	{
-      		return Object.prototype.toString.call(obj) === '[object Array]';
-      	}
+        //@method isArray Auxiliary method to determine is an object is or not an array
+        //@param {Object} obj
+        //@return {Boolean} True if the parameter passed in is an array false otherwise
+        function isArray (obj)
+        {
+          return Object.prototype.toString.call(obj) === '[object Array]';
+        }
       
-      	//@method generateAttributeSpaceNode Generates an artificial singleKey attribute node to represent spaces among values
-      	//We add the ignored space as they play an important role when setting a property's value
-      	//name="prop1{{V1}}" is not the same as name="prop1 {{V1}}"
-      	//@param {String} spaces_value String containing all the spaces to add
-      	//@return {ExtraSpaceSimpleKeyHTMLAttributeASTNode}
-      	function generateAttributeSpaceNode (space_value)
-      	{
-      		//@class ExtraSpaceSimpleKeyHTMLAttributeASTNode @extends SimpleKeyHTMLAttributeASTNode
-      		return {
-      			//@property {String} type Value 'singleKey'
-      			type: 'singleKey'
-      			//@property {String} subType Value 'extraSpaces'
-      		,	subType: 'extraSpaces'
-      			//@property {String} value Variable length string of only spaces
-      		,	value: space_value
-      		};
-      		//@class HandlebarsGrammarContext
-      	}
+        //@method generateAttributeSpaceNode Generates an artificial singleKey attribute node to represent spaces among values
+        //We add the ignored space as they play an important role when setting a property's value
+        //name="prop1{{V1}}" is not the same as name="prop1 {{V1}}"
+        //@param {String} spaces_value String containing all the spaces to add
+        //@return {ExtraSpaceSimpleKeyHTMLAttributeASTNode}
+        function generateAttributeSpaceNode (space_value)
+        {
+          //@class ExtraSpaceSimpleKeyHTMLAttributeASTNode @extends SimpleKeyHTMLAttributeASTNode
+          return {
+            //@property {String} type Value 'singleKey'
+            type: 'singleKey'
+            //@property {String} subType Value 'extraSpaces'
+          , subType: 'extraSpaces'
+            //@property {String} value Variable length string of only spaces
+          , value: space_value
+          };
+          //@class HandlebarsGrammarContext
+        }
       
-      	//@method generateAndConcatAttributeSpaceNode Auxiliary method used to concatenate spaces in the middle of two arrays.
-      	//The spaces are converted into a ExtraSpaceSimpleKeyHTMLAttributeASTNode object and is appended only of the length of the string space is greater than 0
-      	//@param {Array<AttributeASTNode>|AttributeASTNode} accumulator_nodes
-      	//@param {Array<Character>} spaces Please notice this is just an array of string, but based on how PEG works each string will be 1 character long
-      	//@param {Array<AttributeASTNode>?|AttributeASTNode?} tail_values This value is optional
-      	//@return {Array<AttributeASTNode>} Result after concatenating all values
-      	function generateAndConcatAttributeSpaceNode (accumulator_nodes, spaces, tail_values)
-      	{
-      		var spaces_value = joinAttributeSpaces(spaces)
-      		,	result = [];
+        //@method generateAndConcatAttributeSpaceNode Auxiliary method used to concatenate spaces in the middle of two arrays.
+        //The spaces are converted into a ExtraSpaceSimpleKeyHTMLAttributeASTNode object and is appended only of the length of the string space is greater than 0
+        //@param {Array<AttributeASTNode>|AttributeASTNode} accumulator_nodes
+        //@param {Array<Character>} spaces Please notice this is just an array of string, but based on how PEG works each string will be 1 character long
+        //@param {Array<AttributeASTNode>?|AttributeASTNode?} tail_values This value is optional
+        //@return {Array<AttributeASTNode>} Result after concatenating all values
+        function generateAndConcatAttributeSpaceNode (accumulator_nodes, spaces, tail_values)
+        {
+          var spaces_value = joinAttributeSpaces(spaces)
+          , result = [];
       
-      		accumulator_nodes = accumulator_nodes instanceof Array ? accumulator_nodes : [accumulator_nodes];
+          accumulator_nodes = accumulator_nodes instanceof Array ? accumulator_nodes : [accumulator_nodes];
       
-      		if (spaces_value.length)
-      		{
-      			var spaces_obj = generateAttributeSpaceNode(spaces_value);
+          if (spaces_value.length)
+          {
+            var spaces_obj = generateAttributeSpaceNode(spaces_value);
       
-      			result = accumulator_nodes.concat(spaces_obj);
-      			result = !!tail_values ? result.concat(tail_values) : result;
-      		}
-      		else
-      		{
-      			result = !!tail_values ? accumulator_nodes.concat(tail_values) : accumulator_nodes;
-      		}
+            result = accumulator_nodes.concat(spaces_obj);
+            result = !!tail_values ? result.concat(tail_values) : result;
+          }
+          else
+          {
+            result = !!tail_values ? accumulator_nodes.concat(tail_values) : accumulator_nodes;
+          }
       
-      		return result;
-      	}
+          return result;
+        }
       
-      	//@method concatSortedSpaces Auxiliary method used to concatenate an array in the middle of spaces
-      	//@param {Array<Character>} head_spaces This value is optional
-      	//@param {Array<AttributeASTNode>?|AttributeASTNode?} body_nodes This value is optional
-      	//@param {Array<Character>} tail_spaces This value is optional
-      	//@return {Array<AttributeASTNode>}
-      	function concatSortedSpaces (head_spaces, body_nodes, tail_spaces)
-      	{
-      		var result = []
-      		,	head_space_word = joinAttributeSpaces(head_spaces || '')
-      		,	tail_space_word = joinAttributeSpaces(tail_spaces || '');
+        //@method concatSortedSpaces Auxiliary method used to concatenate an array in the middle of spaces
+        //@param {Array<Character>} head_spaces This value is optional
+        //@param {Array<AttributeASTNode>?|AttributeASTNode?} body_nodes This value is optional
+        //@param {Array<Character>} tail_spaces This value is optional
+        //@return {Array<AttributeASTNode>}
+        function concatSortedSpaces (head_spaces, body_nodes, tail_spaces)
+        {
+          var result = []
+          , head_space_word = joinAttributeSpaces(head_spaces || '')
+          , tail_space_word = joinAttributeSpaces(tail_spaces || '');
       
-      		if (head_space_word.length)
-      		{
-      			result = result.concat(generateAttributeSpaceNode(head_spaces));
-      		}
-      		if (body_nodes)
-      		{
-      			result = result.concat(body_nodes);
-      		}
+          if (head_space_word.length)
+          {
+            result = result.concat(generateAttributeSpaceNode(head_spaces));
+          }
+          if (body_nodes)
+          {
+            result = result.concat(body_nodes);
+          }
       
-      		if (tail_space_word.length)
-      		{
-      			result = result.concat(generateAttributeSpaceNode(tail_space_word));
-      		}
+          if (tail_space_word.length)
+          {
+            result = result.concat(generateAttributeSpaceNode(tail_space_word));
+          }
       
-      		return result;
-      	}
+          return result;
+        }
       
-      	//@method getHandlebarsBaseConditionObject Auxiliary method to generate condition nodes
-      	//@param {Array<String>} condition
-      	//@param {String?} type String type to override default 'handlebars' type
-      	//@param {String?} prefix Optional prefix to add to the subType of the returning object
-      	//@return {HandlebarsBaseConditionNodeAST}
-      	function getHandlebarsBaseConditionObject (condition, type, prefix)
-      	{
-      		prefix = prefix || '';
-      		type = type || 'handlebars';
+        //@method getHandlebarsBaseConditionObject Auxiliary method to generate condition nodes
+        //@param {Array<String>} condition
+        //@param {String?} type String type to override default 'handlebars' type
+        //@param {String?} prefix Optional prefix to add to the subType of the returning object
+        //@return {HandlebarsBaseConditionNodeAST}
+        function getHandlebarsBaseConditionObject (condition, type, prefix)
+        {
+          prefix = prefix || '';
+          type = type || 'handlebars';
       
-      		//@class HandlebarsBaseConditionNodeAST
-      		var condition_obj = {
-      				//@property {String} type Value 'handlebars'
-      				type: type
-      				//@property {String} subType Possible values:
-      				// 'LOOKUPSINGLE' in case the condition is a look up (Array of String),
-      				// 'REFERENCEEVALUATION' in case the condition is a reference values (a string IN THE TEMPLATE starting with '@'),
-      				// 'SINGLEEVALUATION' in the the condition is a simple string denoting a simple evaluation
-      				// This values are used with the prefix 'ATTR' when this nodes are created in the context of an attribute
-      			,	subType: ''
-      				//@property {String|Array<String>} value The condition
-      			,	value: condition
-      			};
-      		//@class HandlebarsGrammarContext
+          //@class HandlebarsBaseConditionNodeAST
+          var condition_obj = {
+              //@property {String} type Value 'handlebars'
+              type: type
+              //@property {String} subType Possible values:
+              // 'LOOKUPSINGLE' in case the condition is a look up (Array of String),
+              // 'REFERENCEEVALUATION' in case the condition is a reference values (a string IN THE TEMPLATE starting with '@'),
+              // 'SINGLEEVALUATION' in the the condition is a simple string denoting a simple evaluation
+              // This values are used with the prefix 'ATTR' when this nodes are created in the context of an attribute
+            , subType: ''
+              //@property {String|Array<String>} value The condition
+            , value: condition
+            };
+          //@class HandlebarsGrammarContext
       
-      		if (condition.length > 1)
-      		{
-      			condition_obj.subType = prefix + 'LOOKUPSINGLE';
-      			condition_obj.value = condition;
-      		}
-      		else if (condition[0].indexOf('@') === 0)
-      		{
-      			condition_obj.subType = prefix + 'REFERENCEEVALUATION';
-      			condition_obj.value = condition[0];
-      		}
-      		else
-      		{
-      			condition_obj.subType = prefix + 'SINGLEEVALUATION';
-      			condition_obj.value = condition[0];
-      		}
+          if (condition.length > 1)
+          {
+            condition_obj.subType = prefix + 'LOOKUPSINGLE';
+            condition_obj.value = condition;
+          }
+          else if (condition[0].indexOf('@') === 0)
+          {
+            condition_obj.subType = prefix + 'REFERENCEEVALUATION';
+            condition_obj.value = condition[0];
+          }
+          else
+          {
+            condition_obj.subType = prefix + 'SINGLEEVALUATION';
+            condition_obj.value = condition[0];
+          }
       
-      		return condition_obj;
-      	}
+          return condition_obj;
+        }
       
       
       
