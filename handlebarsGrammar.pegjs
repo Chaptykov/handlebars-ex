@@ -371,7 +371,7 @@ handlebarsUnlessBlock
 
 //@class UnlessBlockHandlebarsNodeASTNode @extends BlockHandlebarsNodeASTNode
 handlebarsPartialBlock
-  = ignorable* "{{#>" space* partialName:word space* params:namedParams space* "}}" ignorable* children:(nodes)? ignorable* "{{/" partialCloseName:word "}}"
+  = ignorable* "{{#>" space* partialName:word space* params:(namedParams)? space* "}}" ignorable* children:(nodes)? ignorable* "{{/" partialCloseName:word "}}"
     {
       return {
         type: 'handlebars',
